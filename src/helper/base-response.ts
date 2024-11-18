@@ -18,7 +18,7 @@ export const BaseResponse = (
       responseData = { statusCode: 200, status: true, message: resMessage, data: result };
       break;
     case 'unauthorized':
-      responseData = { statusCode: 401, status: false, error: resMessage };
+      responseData = { statusCode: 403, status: false, error: resMessage };
       break;
     case 'internalServerError':
       responseData = { statusCode: 500, status: false, error: resMessage };
