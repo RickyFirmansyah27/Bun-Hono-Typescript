@@ -4,6 +4,7 @@ import { Logger } from './helper/logger';
 import { ErrorHandler } from './helper/error-handler';
 import { routes } from './routes';
 import { httpLogger } from './helper/http-logger';
+import { serverless } from './helper';
 
 config();
 
@@ -15,6 +16,8 @@ app.onError(ErrorHandler);
 app.route('/api', routes);
 app.notFound((c) => c.text('Route not found', 404));
 
-Logger.info(`Server running on port ${port}`);
+const server = serverless(app);
 
-export default app;
+server.listen(port, () => {
+  Logger.info(`[Hono-Service] Server is running on port ${port}`);
+});
