@@ -8,15 +8,13 @@ import { httpLogger } from './helper/http-logger';
 config();
 
 const app = new Hono();
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 app.use('*', httpLogger);
 app.onError(ErrorHandler);
 app.route('/api', routes);
 app.notFound((c) => c.text('Route not found', 404));
 
-Logger.info(`Server running on port ${port}`)
-export default {
-  fetch: app.fetch,
-  port: 8000,
-};
+Logger.info(`Server running on port ${port}`);
+
+export default app;
